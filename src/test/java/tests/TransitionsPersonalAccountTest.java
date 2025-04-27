@@ -18,39 +18,16 @@ import page_object.ProfilePage;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
-public class TransitionsPersonalAccountTest {
+public class TransitionsPersonalAccountTest extends BaseTest {
 
-    private WebDriver driver;
-    private String driverType; //добавила в код
     private final static String EMAIL = "dj-sereg@ya.ru";
     private final static String PASSWORD = "Ajkysirj12!";
 
     public TransitionsPersonalAccountTest(String driverType) {
-        this.driverType = driverType;
+        super(driverType);
     }
 
-    @Before
-    public void startUp() {
-        if (driverType.equals("chromedriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        } else if (driverType.equals("yandexdriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
-            // Установка пути к браузеру Yandex
-            ChromeOptions options = new ChromeOptions();
-            options.setBinary("C:\\Users\\Bulgakov\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        }
-    }
+
 
     @Parameterized.Parameters(name = "Результаты проверок браузера: {0}")
     public static Object[][] getDataDriver() {

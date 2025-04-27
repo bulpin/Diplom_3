@@ -15,36 +15,10 @@ import page_object.MainPage;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
-public class TransitionsSectionsConstructorTest {
-
-    private WebDriver driver;
-    private String driverType;
+public class TransitionsSectionsConstructorTest extends BaseTest {
 
     public TransitionsSectionsConstructorTest(String driverType) {
-        this.driverType = driverType;
-    }
-
-    @Before
-    public void startUp() {
-        if (driverType.equals("chromedriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        } else if (driverType.equals("yandexdriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
-            // Установка пути к браузеру Yandex
-            ChromeOptions options = new ChromeOptions();
-            options.setBinary("C:\\Users\\Bulgakov\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        }
+        super(driverType);
     }
 
     @Parameterized.Parameters(name = "Результаты проверок браузера: {0}")

@@ -18,10 +18,7 @@ import java.util.concurrent.TimeUnit;
 import static org.apache.commons.lang3.RandomStringUtils.*;
 
 @RunWith(Parameterized.class)
-public class RegistrationTest {
-
-    private WebDriver driver;
-    private String driverType;
+public class RegistrationTest extends BaseTest {
     public static String accessToken;
 
     String NAME = randomAlphanumeric(4, 8);
@@ -30,30 +27,7 @@ public class RegistrationTest {
     String PASSWORD_FAILED = randomAlphanumeric(0, 5);
 
     public RegistrationTest(String driverType) {
-        this.driverType = driverType;
-    }
-
-    @Before
-    public void startUp() {
-        if (driverType.equals("chromedriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        } else if (driverType.equals("yandexdriver")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver.exe");
-            // Установка пути к браузеру Yandex
-            ChromeOptions options = new ChromeOptions();
-            options.setBinary("C:\\Users\\Bulgakov\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-            driver = new ChromeDriver(options);
-            // Установка неявного ожидания
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            // Переход на тестируемый сайт
-            driver.navigate().to("https://stellarburgers.nomoreparties.site/");
-        }
+        super(driverType);
     }
 
     @Parameterized.Parameters(name = "Результаты проверок браузера: {0}")
